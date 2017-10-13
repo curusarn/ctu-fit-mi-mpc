@@ -5,7 +5,7 @@
 class StringData {
     // aka SmartUnion
     // dumb storage class that enables access to overlapping attributes
-    // no validity checks are porformed
+    // no validity checks are performed
     
     char * data_;
 
