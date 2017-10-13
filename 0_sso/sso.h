@@ -1,14 +1,19 @@
 
 #include <iostream>
 
+union StringData {
+    char * ptr_;
+    char str_[7];
+};
+
 class String {
-    char * data_;
+    StringData data_;
     bool sso_; 
 
     bool get_sso();
 
 public:
-    String() : data_(nullptr), sso_(false) {}
+    String() : data_.ptr_(nullptr), sso_(false) {}
     String(const char * str);
     String(const String & str) = delete;
     String operator=(const String & str) = delete;
