@@ -11,5 +11,4 @@ int main() {
     std::cout << s1 << std::endl;
     std::cout << s2 << std::endl;
     
-
 }

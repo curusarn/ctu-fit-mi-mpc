@@ -2,8 +2,8 @@
 #include <iostream>
 
 union StringData {
-    char * ptr_;
-    char str_[7];
+    char * ptr;
+    char str[7];
 };
 
 class String {
