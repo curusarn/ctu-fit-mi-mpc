@@ -10,10 +10,10 @@ class String {
     StringData data_;
     bool sso_; 
 
-    bool get_sso();
+    bool get_sso() const;
 
 public:
-    String() : data_.ptr_(nullptr), sso_(false) {}
+    String(); 
     String(const char * str);
     String(const String & str) = delete;
     String operator=(const String & str) = delete;
