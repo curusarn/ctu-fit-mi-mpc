@@ -3,7 +3,7 @@
 ## Introduction
 This solution implements sso where single pointer is used to store string (if it is short enough) or pointer pointing to allocated string (if it is too long) and flag that tells us if sso is used.
 
-In order to store "sso_flag" in the pointer itself I had to define "custom union" class `StringData`. 
+In order to store "sso_flag" in the pointer itself I have defined "custom union" class `StringData`. 
 
 ### class String
 This is the main string class. It does all the allocations, deallocations, copying and contains all the logic related to string manipulation itself.
