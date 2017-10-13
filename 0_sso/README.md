@@ -10,7 +10,7 @@ This is the main string class. It does all the allocations, deallocations, copyi
 It contains `StringData` class that holds the data.
 
 ### class StringData
-This class takes care of the dirty work. It does all the casting, bitwise operations.
+This class takes care of the dirty work. It does all the casting and bitwise operations.
 However it does not contain any advanced logic. The sole purpose of this class is to provide comfortable interface for data manipulation. 
 
 
