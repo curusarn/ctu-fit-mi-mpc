@@ -11,7 +11,7 @@ It contains `StringData` class that holds the data.
 
 ### class StringData
 This class takes care of the dirty work. It does all the casting, bitwise operations.
-However it does not contain any advanced logic. The sole purpose of this class is to provide comfortable interface for data access to `String` class. 
+However it does not contain any advanced logic. The sole purpose of this class is to provide comfortable interface for data manipulation. 
 
 
 
