@@ -1,9 +1,8 @@
-
 #include <iostream>
 #define SSO_MASK 0x01
 
 class StringData {
-    // aka SmartUnion
+    // kind of like Union
     // dumb storage class that enables access to overlapping attributes
     // no validity checks are performed
     
@@ -29,8 +28,8 @@ class String {
 public:
     String(); 
     String(const char * str);
-    String(const String & str) = delete;
-    String operator=(const String & str) = delete;
+    String(const String & str) = delete; // not a part of this task - make sure none calls this
+    String operator=(const String & str) = delete; // not a part of this task - make sure none calls this
     friend std::ostream & operator<<(std::ostream & os, const String & str);
     ~String();
 };
