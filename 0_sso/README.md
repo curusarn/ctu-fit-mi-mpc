@@ -1,7 +1,9 @@
 # Small string optimization
 
 ## Introduction
-This solution implements sso where single pointer is used to store string (if it is short enough) or pointer pointing to allocated string (if it is too long) and flag that tells us if sso is used.
+This solution implements SSO (small string optimization) where single pointer is used to store string (if it is short enough) or pointer pointing to allocated string (if it is too long) and flag that tells us if SSO is used.
+
+It is important that 4 least significant bits in any pointer on x86 platform are always zero - I'm using one of them to store boolean value of "sso_flag".
 
 In order to store "sso_flag" in the pointer itself I have defined `StringData` class that does the dirty work and `String` class that does regular string manipulation. 
 
