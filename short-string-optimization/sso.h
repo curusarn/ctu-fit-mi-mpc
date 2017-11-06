@@ -1,29 +1,14 @@
+#ifndef SSO_H
+#define SSO_H
 #include <iostream>
+#include <iosfwd>
 #define SSO_MASK 0x01
 
-class StringData {
-    // kind of like Union
-    // dumb storage class that enables access to overlapping attributes
-    // no validity checks are performed
-    
-    char * data_;
-
-public:
-    StringData() : data_(nullptr) {};
-    char * & ptr() { return data_; };
-    char * str() { return (char *)(&data_); };
-    const char * ptr() const { return data_; };
-    const char * str() const { return (char *)(&data_); };
-    bool get_sso() const { return SSO_MASK & str()[7]; };
-    void set_sso(bool);
-};
-
-
 class String {
-    StringData data_;
 
-    bool get_sso() const { return data_.get_sso(); };
-    void set_sso(bool b) { data_.set_sso(b); };
+    class Impl;
+    class Data;
+    Impl *pimpl_;
 
 public:
     String(); 
@@ -32,4 +17,7 @@ public:
     String operator=(const String & str) = delete; // not a part of this task - make sure none calls this
     friend std::ostream & operator<<(std::ostream & os, const String & str);
     ~String();
+    void swap(String & str);
 };
+
+#endif //SSO_H
