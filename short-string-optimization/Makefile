@@ -1,12 +1,13 @@
 
 files=main.cc sso.cc
+cxx_flags=-std=c++11 -pedantic -Wall -Wextra -o main.out -g
 
 valgrind: compile
-	valgrind ./main_O2.out
+	valgrind ./main.out
 
 run: compile
-	./main_O2.out
+	./main.out
 
 compile:
-	g++ -std=c++11 -g -pedantic -Wall -Wextra -O2 -o main_O2.out ${files} 
+	g++ ${cxx_flags} -O2 ${files} 
 

@@ -13,11 +13,12 @@ class String {
 public:
     String(); 
     String(const char * str);
-    String(const String & str) = delete; // not a part of this task - make sure none calls this
-    String operator=(const String & str) = delete; // not a part of this task - make sure none calls this
+    String(const String & str);
+    String & operator=(const String & str);
     friend std::ostream & operator<<(std::ostream & os, const String & str);
     ~String();
     void swap(String & str);
+    const char * c_str() const;
 };
 
 #endif //SSO_H

@@ -35,11 +35,13 @@ class String::Impl {
 public:
     Impl(); 
     Impl(const char * str);
-    Impl(const Impl & str) = delete; // not a part of this task - make sure none calls this
-    Impl operator=(const Impl & str) = delete; // not a part of this task - make sure none calls this
+    Impl(const Impl & str);
+    Impl & operator=(const Impl & str) = delete;
+    // sanity check - String::op= does not use String::Impl::op=
     std::ostream & ostreamFunc_noOperator_iGiveUp(std::ostream & os) const; 
     // is it even possible to do this with operator<< ??
     ~Impl();
+    const char * c_str() const;
 };
 
 String::Impl::Impl() {
@@ -49,7 +51,10 @@ String::Impl::Impl() {
 
 String::Impl::Impl(const char * str) {
     uint len = std::strlen(str);
-    if (len < 8) {
+    if (!len) {
+        data_.ptr() = nullptr;
+        data_.set_sso(false);
+    } else if (len < 8) {
         data_.set_sso(true);
         std::strcpy(data_.str(), str);
     } else {
@@ -59,11 +64,21 @@ String::Impl::Impl(const char * str) {
     }
 }
 
+String::Impl::Impl(const Impl & str) : Impl(str.c_str()) {} 
 String::Impl::~Impl() {
     if (!data_.get_sso()) delete[] data_.ptr();
 }
+const char * String::Impl::c_str() const {
+    if (data_.get_sso()) 
+        return data_.str();
+    if (data_.ptr())
+        return data_.ptr();
+    return "";
+}
 
 std::ostream & String::Impl::ostreamFunc_noOperator_iGiveUp(std::ostream & os) const {
+    // I would use String::Impl::c_str() to simplify this function
+    //      but I want to keep the "<special debugging outputs>"
     if (data_.get_sso()) 
         os << data_.str() << "<stored in buffer>";
     else if (data_.ptr())
@@ -74,10 +89,19 @@ std::ostream & String::Impl::ostreamFunc_noOperator_iGiveUp(std::ostream & os) c
     return os;
 }
 
+
 String::String() : pimpl_(new Impl()) {} 
 String::String(const char * str) : pimpl_(new Impl(str)) {}
+String::String(const String & str) : pimpl_(new Impl(*(str.pimpl_))) {}
+String & String::operator=(const String & str) {
+    String tmp(str);
+    swap(tmp);
+    return *this;
+}
 std::ostream & operator<<(std::ostream & os, const String & str) {
     return str.pimpl_->ostreamFunc_noOperator_iGiveUp(os);
 }
 String::~String() { delete pimpl_; }
 void String::swap(String & str) { std::swap(pimpl_, str.pimpl_); }
+const char * String::c_str() const { return pimpl_->c_str(); }
+
