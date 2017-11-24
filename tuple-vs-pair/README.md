@@ -25,3 +25,6 @@ prog.cc:5:25: error: converting to 'std::tuple<int, int>' from initializer list 
                          ^
 ```
 
+## Answer
+
+Tuples couldn't be implicitly constructed before C++17.
