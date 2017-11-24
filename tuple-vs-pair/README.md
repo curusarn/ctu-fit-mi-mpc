@@ -27,6 +27,6 @@ prog.cc:5:25: error: converting to 'std::tuple<int, int>' from initializer list 
 
 ## Answer
 
-Using list initialization after return statement (copy-list-initialization) implicitly calls tuple constructor.  
+Using list initialization after return statement (case of copy-list-initialization) implicitly calls tuple constructor.  
 But tuples couldn't be implicitly constructed before C++17.  
 Therefore code causes errors in C++11, C++14 but compiles in C++17.
